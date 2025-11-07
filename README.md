@@ -17,8 +17,17 @@ This repository hosts my Takahashi‑style intro: who I am, what drives me, and 
 > [!IMPORTANT]
 > Slides stay effective when each idea fits in a handful of words. Resist the urge to shrink font sizes to cram more.
 
+## Project Structure
+```
+index.html          # Entry point, loads highlight.js + Takahashi renderer
+src/takahashi.js    # Parser & slide rendering logic (moved from root)
+slides/source.md    # Primary slide deck markdown
+styles/main.css     # Extracted presentation styles
+.vscode/            # Debug & task configurations
+```
+
 ## Content Format
-Slides are authored in a Markdown file (e.g. `source.md`) using a constrained subset:
+Slides are authored in a Markdown file (now `slides/source.md`) using a constrained subset:
 - `# Title` (primary slide text)
 - `- Subtitle` (optional secondary line)
 - Blank line separates slides
@@ -45,20 +54,41 @@ Example (conceptual — not the full intro):
 > Keep a rhythmic flow: group related slides, alternate emphasis (e.g. identity, values, approach), and insert breathing (short single‑word slides) to reset attention.
 
 ## Quick Start
-1. Add or edit `source.md` with Takahashi‑style content.
-2. Ensure the parser script (from upstream) is referenced in your static HTML (e.g. `slide.html`).
-3. Open the HTML file locally in a modern browser to preview.
-4. Adjust wording until pacing feels natural when spoken aloud.
+1. Edit `slides/source.md` with Takahashi‑style content.
+2. Launch the existing VS Code debug config `Chrome: Takahashi Slides` (starts server + opens browser).
+3. Refresh the browser after edits (no live reload enabled by choice).
+4. Rehearse out loud; trim wording until rhythm feels natural.
 
 ## Deployment
-A GitHub Actions workflow (to be added) will publish the static site to GitHub Pages:
-- Trigger: push to `main`
-- Steps: checkout → (optionally copy/update `source.md`) → upload artifact → deploy to Pages
+### GitHub Pages via Actions
+The site is deployed automatically to **GitHub Pages** using the workflow at `/.github/workflows/pages.yml`.
 
-When present, visit the repository’s Pages URL to view the live intro.
+Current configuration:
+- Trigger: push to `repository-setup` (will switch to `main` after branch rename)
+- Artifact: entire repository root (static only, no build step yet)
+- Actions used: `actions/checkout@v4`, `actions/upload-pages-artifact@v3`, `actions/deploy-pages@v4`
 
-> [!NOTE]
-> If you haven’t added the workflow yet, create `.github/workflows/pages.yml` with a basic Pages deploy job later. This README intentionally omits the YAML for brevity.
+### Enable Pages (one-time)
+1. Go to: Repository Settings → Pages.
+2. Set Source: GitHub Actions.
+3. Save. After next successful workflow run the URL appears (and is surfaced in the workflow summary as `page_url`).
+
+### Customize (optional)
+- Branch rename: After creating a `main` branch, update `branches` in `pages.yml`.
+- Build step: Insert before the upload step if you add tooling (e.g. bundling, minification).
+- Exclude files: Create a staging build directory and point `upload-pages-artifact` `path:` to that directory instead of `.`.
+- Custom domain: Add `CNAME` file at repo root with domain name, then configure DNS + Pages custom domain settings.
+
+### Manual Trigger
+You can dispatch the workflow manually under the Actions tab (`workflow_dispatch`) to force a redeploy even without changes.
+
+### Future Enhancements
+- Cache build output once a build pipeline is introduced.
+- Accessibility & performance audit (Lighthouse) in a pre-deploy job.
+- Simple link validation for any future outbound references.
+
+> [!TIP]
+> Keep it static unless complexity adds real storytelling value. Simplicity = reliability + zero build latency.
 
 ## Roadmap
 - [ ] Add initial `source.md` content

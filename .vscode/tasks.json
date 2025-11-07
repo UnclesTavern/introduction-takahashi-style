@@ -1,0 +1,25 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "serve-http",
+      "type": "shell",
+      "command": "npx http-server . -p 8080 -c-1",
+      "options": { "cwd": "${workspaceFolder}" },
+      "isBackground": true,
+      "problemMatcher": [
+        {
+          "owner": "http-server",
+          "pattern": {
+            "regexp": "^$"  
+          },
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": "Starting up http-server",
+            "endsPattern": "Available on:"  
+          }
+        }
+      ]
+    }
+  ]
+}

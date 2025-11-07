@@ -1,0 +1,29 @@
+body {
+  font-family: "Helvetica", "sans-serif";
+  font-weight: bold;
+  background-color: #efefef;
+  color: #000;
+  white-space: nowrap;
+  margin: 0;
+}
+
+h1, h2 {
+  text-align: center;
+  line-height: 1.1em;
+}
+
+a, em, b {
+  color: #C50;
+  font-style: normal;
+}
+
+a {
+  border-bottom: .1em dotted;
+  text-decoration: none;
+}
+
+.fullscreen-image {
+  display: block;
+  margin: 0 auto;
+  height: 100%;
+}

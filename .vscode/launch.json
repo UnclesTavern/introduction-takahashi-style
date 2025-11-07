@@ -1,0 +1,18 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Chrome: Takahashi Slides",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:8080/index.html",
+      "webRoot": "${workspaceFolder}",
+      "preLaunchTask": "serve-http",
+      "serverReadyAction": {
+        "pattern": "127\\.0\\.0\\.1:8080",
+        "uriFormat": "http://127.0.0.1:8080/index.html",
+        "action": "openExternally"
+      }
+    }
+  ]
+}

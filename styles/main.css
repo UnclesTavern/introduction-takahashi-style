@@ -1,7 +1,8 @@
 body {
   font-family: "Helvetica", "sans-serif";
   font-weight: bold;
-  background-color: #efefef;
+  /* Softer low-contrast background (blue-grey) that's easier on the eyes than near-white */
+  background-color: #e3e7ef; /* alternative options to try: #e8e5dc (warm), #dde3e9 (cool) */
   color: #000;
   white-space: nowrap;
   margin: 0;

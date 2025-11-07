@@ -91,17 +91,26 @@ You can dispatch the workflow manually under the Actions tab (`workflow_dispatch
 > Keep it static unless complexity adds real storytelling value. Simplicity = reliability + zero build latency.
 
 ## Roadmap
-- [ ] Add initial `source.md` content
-- [ ] Add GitHub Pages workflow
+- [x] Add GitHub Pages workflow
 - [ ] Optional: lightweight theming (font & color tweaks only)
-- [ ] Rehearsal notes / speaker timing guide
 
 ## Author
-**Erick Segaar** "UncleBats". This intro is a distilled lens into how I approach engineering and communication.
+**Erick Segaar** "UncleBats". 
+
+## Available Markdown Syntax
+The parser of `Takahashi.js` accepts a Markdown-like syntax:
+
+- `# This is Title : Only one level title is accepted. Don't forget add a space after #.`
+- `-` This is subtitle : placed under title.
+- `# ![](path/to/image.jpg)` : Fullscreen image
+- `![](path/to/image.jpg)` : Image + Title (+ Subtitle)
+- `\\` : A new line.
+- `*italic*`
+- `**colored emphasis**`
+- `+striked+` : this syntax is inspired by Org-mode.
+- ```lisp` : The same as Github-flavored Markdown -- code block with syntax highlight. 
 
 ## Attribution & Credits
 > [!NOTE]
 > Core parsing logic: [`kuanyui/takahashi.js`](https://github.com/kuanyui/takahashi.js) (MIT). Without that project, this minimalist intro workflow would be far more complex.
 
-## Feedback
-Feel free to open an issue with suggestions on pacing, wording density, or slide ordering. Tight feedback loops sharpen the message.

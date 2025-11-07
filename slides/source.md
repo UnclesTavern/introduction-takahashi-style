@@ -7,7 +7,7 @@
 
 # Passionate About
 - Helping
-- Bridging Gaps
+- Bridging Gaps (AI, FGA)
 - Training or Hackathons
 
 # Expertise

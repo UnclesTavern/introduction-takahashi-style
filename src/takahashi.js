@@ -8,6 +8,8 @@ onload = function() {
 
     function Parser(markdownFileUrl) {
         this.markdownFileUrl = markdownFileUrl;
+        // Track the most recent heading so each bullet can become its own slide with repeated title.
+        this.currentTitle = null;
         this.parsed = this.parse(markdownFileUrl);
     };
 
@@ -45,16 +47,32 @@ onload = function() {
         }
         if (head.substring(0, 4) === "![](") {
             var imgUrl2 = head.match(imagePattern)[1];
-            parsed[parsed.length - 1].type = "image-and-title";
-            parsed[parsed.length - 1].imgUrl = imgUrl2;
+            if (parsed.length === 0 || (parsed[parsed.length - 1] && !parsed[parsed.length - 1].imgUrl && parsed[parsed.length - 1].subtitle === undefined && parsed[parsed.length -1].title === undefined)) {
+                // Fallback: create a slide if no slide exists yet
+                parsed.push({type: "image-and-title", title: this.currentTitle, imgUrl: imgUrl2});
+            } else if (parsed.length === 0) {
+                parsed.push({type: "image-and-title", title: this.currentTitle, imgUrl: imgUrl2});
+            } else {
+                // Attach image to previous slide (legacy behavior) if a slide was already created
+                parsed[parsed.length - 1].type = "image-and-title";
+                parsed[parsed.length - 1].imgUrl = imgUrl2;
+            }
             return this.__parse(lines.slice(1), parsed);
         }
         if (head.substring(0, 2) === "# ") {
-            parsed.push({type: "normal", title: processEmphasisMarks(head.substring(2))});
+            // Store title; actual slide(s) will be created for each bullet line following.
+            this.currentTitle = processEmphasisMarks(head.substring(2));
             return this.__parse(lines.slice(1), parsed);
         }
         if (head.substring(0, 2) === "- ") {
-            parsed[parsed.length - 1].subtitle = processEmphasisMarks(head.substring(2));
+            // Each bullet becomes its own slide repeating the last heading as title.
+            var bullet = processEmphasisMarks(head.substring(2));
+            if (this.currentTitle) {
+                parsed.push({type: "normal", title: this.currentTitle, subtitle: bullet});
+            } else {
+                // No heading yet; treat bullet as standalone title slide.
+                parsed.push({type: "normal", title: bullet});
+            }
             return this.__parse(lines.slice(1), parsed);
         }
         if (head.substring(0, 3) === "```") {
@@ -99,8 +117,9 @@ onload = function() {
             var $slide = document.createElement("slide");
             $slide.id = i;
             $slide.className = slideData.type;
-            if (slideData.subtitle){ $slide.innerHTML += "<h2>" + slideData.subtitle + "</h2>"; }
-            if (slideData.title){ $slide.innerHTML += "<h1>" + slideData.title + "</h1>"; }
+            // Swapped: show title on top with smaller font (h2 styling logic), and subtitle as large main (h1)
+            if (slideData.title){ $slide.innerHTML += "<h2 class='slide-title'>" + slideData.title + "</h2>"; }
+            if (slideData.subtitle){ $slide.innerHTML += "<h1 class='slide-subtitle'>" + slideData.subtitle + "</h1>"; }
             if (slideData.type==="fullscreen-image"){ $slide.innerHTML += "<img class='fullscreen-image' src='" + slideData.imgUrl + "'></img>"; }
             if (slideData.type==="image-and-title"){ $slide.innerHTML += "<img class='image-and-title' src='" + slideData.imgUrl + "'></img>"; }
             if (slideData.type==="codeblock"){ $slide.innerHTML += "<pre><code class='" + slideData.language + "'>" + slideData.code + "</code></pre>"; }
@@ -122,8 +141,8 @@ onload = function() {
 
     function render(pageN){
         var $slide = document.getElementById(pageN);
-        var $h1 = $slide.getElementsByTagName("h1")[0] || null;
-        var $h2 = $slide.getElementsByTagName("h2")[0] || null;
+    var $h1 = $slide.getElementsByTagName("h1")[0] || null; // now subtitle
+    var $h2 = $slide.getElementsByTagName("h2")[0] || null; // now title
         var $img = $slide.getElementsByTagName("img")[0] || null;
         var $block = $slide.getElementsByTagName("pre")[0] || null;
         if ($h2) {

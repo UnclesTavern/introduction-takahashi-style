@@ -1,11 +1,30 @@
-# Erick
-- Builder
+# Erick Segaar
+- Femke & Lieke
+- Marleen
+- Assendelft, Netherlands
+- QuickBasic
+- BBQ-Smoker
 
-# Systems
-- Over Hype
+# Passionate About
+- Helping
+- Bridging Gaps (AI, FGA)
+- Training or Hackathons
 
-# Shipping
-- > Talking
+# Expertise
+- Solution mode
+- Devops
+- Scrum
+- Azure
+- Github
+- IAC
 
-# Craft
-- Empathy
+# Working with me
+- Direct
+- No politics
+- MyUserManual ;)
+
+# Leisure
+- Cycling
+- Games
+- Audiobooks
+- BBQ

@@ -17,6 +17,7 @@
 - Azure
 - Github
 - IAC
+- Former Assignments
 
 # Working with me
 - Direct

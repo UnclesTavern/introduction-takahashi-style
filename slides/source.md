@@ -10,6 +10,21 @@
 - Bridging Gaps (AI, FGA)
 - Training or Hackathons
 
+# AI & Development
+- GitHub Copilot
+- AI Agents
+- Modern Workflows
+
+# AI Agents
+- Specialized Assistants
+- Code Generation
+- Problem Solving
+
+# Models & Tools
+- Language Models
+- Code Understanding
+- Developer Productivity
+
 # Expertise
 - Solution mode
 - Devops

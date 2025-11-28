@@ -29,3 +29,10 @@
 - Games
 - Audiobooks
 - BBQ
+
+# Fun Facts
+- Qualified for the Olympics
+- Rode a unicycle
+- Played trumpet
+- First beer at 12
+- Fishing as a kid

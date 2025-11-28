@@ -24,6 +24,11 @@
 - No politics
 - MyUserManual ;)
 
+# Recent Hackathons I Proctored
+- Billund, Agentic AI Hackathon
+- Copenhagen, Agentic AI Hackathon
+- The Hague, Custom AI Hackathon
+
 # Leisure
 - Cycling
 - Games
